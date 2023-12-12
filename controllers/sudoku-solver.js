@@ -42,10 +42,10 @@ class SudokuSolver {
     data = data.substring(0, column - 1) + data.substring(column)
 
     if(data.match(new RegExp(value, 'g'))){
-      return {'valide': false, 'conflict': 'row'}
+      return {'valid': false, 'conflict': 'row'}
     }
 
-    return {'valide': true}
+    return {'valid': true}
   }
 
   checkColPlacement(puzzleString, row, column, value) {
@@ -60,10 +60,10 @@ class SudokuSolver {
     data = data.substring(0, row - 1) + data.substring(row)
 
     if(data.match(new RegExp(value, 'g'))){
-      return {'valide': false, 'conflict': 'column'}
+      return {'valid': false, 'conflict': 'column'}
     }
 
-    return {'valide': true}
+    return {'valid': true}
   }
 
   checkRegionPlacement(puzzleString, row, column, value) {
@@ -105,10 +105,10 @@ class SudokuSolver {
     data = data.substring(0, position) + data.substring(position + 1)
 
     if(data.match(new RegExp(value, 'g'))){
-      return {'valide': false, 'conflict': 'region'}
+      return {'valid': false, 'conflict': 'region'}
     }
 
-    return {'valide': true}
+    return {'valid': true}
   }
 
   checkPlacement(puzzleString, row, column, value) {
@@ -131,13 +131,13 @@ class SudokuSolver {
     let result = []
 
     for(let i in problems){
-      if(!problems[i]['valide']){
-        result.push(problems[i])
+      if(!problems[i]['valid']){
+        result.push(problems[i]['conflict'])
       }
     }
 
     if(result.length > 0){
-      return result
+      return {'valid': false, 'conflict': result}
     } else {
       return problems[0]
     }

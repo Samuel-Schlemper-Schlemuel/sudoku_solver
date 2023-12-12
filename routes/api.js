@@ -9,17 +9,17 @@ module.exports = function (app) {
   app.route('/api/check')
     .post((req, res) => {
       let puzzle = req.body.puzzle
+      let value = req.body.value
+      let coordinate = req.body.coordinate
+
+      if(puzzle == undefined || value == undefined || coordinate == undefined){
+        return res.json({ error: 'Required field(s) missing' })
+      }
+
       let validate = solver.validate(puzzle)
 
       if(validate != 'valid'){
         return res.json(validate)
-      }
-
-      let coordinate = req.body.coordinate
-      let value = req.body.value
-
-      if(value.length > 1){
-        return res.json({ "error": "Invalid value" })
       }
 
       if(coordinate.length > 2){
