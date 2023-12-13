@@ -34,6 +34,18 @@ module.exports = function (app) {
     
   app.route('/api/solve')
     .post((req, res) => {
-      return res.json({1: undefined})
+      let puzzle = req.body.puzzle
+
+      if(puzzle == undefined){
+        return res.json({ error: 'Required field missing' })
+      }
+
+      let validate = solver.validate(puzzle)
+
+      if(validate != 'valid'){
+        return res.json(validate)
+      }
+
+      return res.json(solver.solve(puzzle))
     })
 }
