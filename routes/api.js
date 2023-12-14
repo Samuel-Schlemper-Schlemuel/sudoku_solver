@@ -40,12 +40,6 @@ module.exports = function (app) {
         return res.json({ error: 'Required field missing' })
       }
 
-      let validate = solver.validate(puzzle)
-
-      if(validate != 'valid'){
-        return res.json(validate)
-      }
-
       return res.json(solver.solve(puzzle))
     })
 }

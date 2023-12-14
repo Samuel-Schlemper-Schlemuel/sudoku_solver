@@ -240,6 +240,12 @@ class SudokuSolver {
   }
 
   solve(puzzle) {
+    let validate = this.validate(puzzle)
+
+    if(validate != 'valid'){
+      return validate
+    }
+
     let result = undefined
 
     while(result == undefined){
